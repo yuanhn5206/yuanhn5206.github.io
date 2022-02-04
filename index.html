@@ -176,7 +176,7 @@
 </li>
 </ul>
 <p>一个类图的示意图如下所示：</p>
-<p><img src="/.com//image%5CC-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%5CEmployee%E7%B1%BB%E7%A4%BA%E6%84%8F%E5%9B%BE.jpg" alt="类图示意"></p>
+<p><img src="https://s2.loli.net/2022/02/04/etzNIkHf6X8mZEb.jpg" alt="Employee类示意图.jpg"></p>
 <h3 id="2-类之间的关系"><a href="#2-类之间的关系" class="headerlink" title="2 类之间的关系"></a>2 类之间的关系</h3><ol>
 <li><p>关联关系 是类与类之间最常用的一种结构化关系，用于表示一类对象与另一类对象之间有联系</p>
 <ul>
@@ -186,14 +186,14 @@
 <ul>
 <li>复合（composition） 例如猴子和心脏，猴子死去，心脏也停止跳动</li>
 </ul>
-<p> <img src="/.com//image%5CC-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%5C%E5%A4%8D%E5%90%88%E5%85%B3%E7%B3%BB.jpg"></p>
+<p> <img src="https://s2.loli.net/2022/02/04/LfVJ83Rj9TXk1nt.jpg" alt="复合关系.jpg"></p>
 <ul>
 <li>依赖关系 例如司机和汽车的关系，司机依赖汽车，一个事物需要使用另一个事物</li>
 </ul>
-<p> <img src="/.com//image%5CC-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%5C%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB.jpg"></p>
+<p> <img src="https://s2.loli.net/2022/02/04/PUaoHwqhnCT8v7V.jpg" alt="依赖关系.jpg"></p>
 <ul>
 <li>继承关系<br><img src="/.com//image%5CC-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%5C%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.jpg"></li>
-<li>接口实现（纯虚类）<br><img src="/.com//image%5CC-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%5C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0.jpg"></li>
+<li>接口实现（纯虚类）<br><img src="https://s2.loli.net/2022/02/04/YkCKqzoTtwF2HMa.jpg" alt="接口实现.jpg"></li>
 </ul>
 </li>
 <li><p>在UML图中，用实线连接有关联的对象所对应的类，在编程语言中表现为<strong>一个类的对象作为另一个类的属性</strong></p>
@@ -208,8 +208,7 @@
 
 <p>​    <strong>代码分析：</strong>该程序的特征是封装性被破坏，客户知道Impl类并且知道Impl类中的test方法完成功能。简单工厂：只想让你知道程序如何运作，而不像让你知道类中的具体细节。别再客户端将Impl创建出来。</p>
 <h5 id="3-2-2-使用简单工厂重构代码"><a href="#3-2-2-使用简单工厂重构代码" class="headerlink" title="3.2.2 使用简单工厂重构代码"></a>3.2.2 使用简单工厂重构代码</h5><p>简单工厂模式的UML图如下所示：</p>
-<img src="/.com//C-设计模式——工厂模式\简单工厂类图.png" style="zoom:67%;">
-
+<p><img src="https://s2.loli.net/2022/02/04/brQ3F7kvtSXinDZ.png" alt="简单工厂类图.png"></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Api</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(string s)</span> </span>= <span class="number">0</span>;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="built_in">Api</span>()&#123;&#125;<span class="comment">// 屏蔽构造函数，实现接口隔离</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImplOne</span> :</span> <span class="keyword">public</span>  Api&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(string s)</span></span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;现在是ImplOne类， 正在执行功能方法&quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImplTwo</span> :</span> <span class="keyword">public</span>  Api&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(string s)</span></span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;现在是ImplTwo类， 正在执行功能方法&quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Factory</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> Api* <span class="title">createApi</span><span class="params">(<span class="keyword">int</span> type)</span></span>&#123;</span><br><span class="line">        Api *pApi = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="built_in"><span class="keyword">switch</span></span> (type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            pApi = <span class="keyword">new</span> <span class="built_in">ImplOne</span>();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            pApi = <span class="keyword">new</span> <span class="built_in">ImplTwo</span>();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pApi;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Api *pApi = Factory::<span class="built_in">createApi</span>(<span class="number">2</span>);</span><br><span class="line">    pApi-&gt;<span class="built_in">test</span>(<span class="string">&quot;使用工厂方法重构&quot;</span>);</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>​    <strong>代码分析：</strong> 客户看不到ImplOne和ImplTwo，可以写一个使用文档给用户，给用户指导如何使用，而用户却看不到其中的细节，达到了封装的效果。</p>
@@ -700,81 +699,6 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/02/01/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2022/02/01/hello-world/" class="archive-article-date">
-  	<time datetime="2022-01-31T18:06:14.493Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/02/01/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -860,11 +784,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>
