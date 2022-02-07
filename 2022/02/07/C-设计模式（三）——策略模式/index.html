@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022/2 | Yuan H.N</title>
+  <title>C++设计模式（三）——策略模式 | Yuan H.N</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C++、计算机三维视觉、机器人">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yuan H.N">
-<meta property="og:url" content="http://example.com/archives/2022/02/index.html">
+  <meta name="description" content="C++设计模式（三）——策略模式策略模式的动机  在软件构建过程中，某些对象使用的算法可能多种多样，经常改变，如果将这些算法都编码到对象中，将会使对象变得异常复杂；而且有时候支持不使用的算法也是一个性能负担。这个性能负担主要是指在分支语句或者判断语句中，特定的场景会冗余很多的代码不被使用，这点会影响程序的性能。 场景说明  现有一个程序用于计算不同国家的税，不同国家的税法有着不同的计算方式，所以一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++设计模式（三）——策略模式">
+<meta property="og:url" content="http://example.com/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Yuan H.N">
-<meta property="og:description" content="C++、计算机三维视觉、机器人">
+<meta property="og:description" content="C++设计模式（三）——策略模式策略模式的动机  在软件构建过程中，某些对象使用的算法可能多种多样，经常改变，如果将这些算法都编码到对象中，将会使对象变得异常复杂；而且有时候支持不使用的算法也是一个性能负担。这个性能负担主要是指在分支语句或者判断语句中，特定的场景会冗余很多的代码不被使用，这点会影响程序的性能。 场景说明  现有一个程序用于计算不同国家的税，不同国家的税法有着不同的计算方式，所以一">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2022/02/07/nu7lU6aXmGbODTY.jpg">
+<meta property="article:published_time" content="2022-02-07T15:47:07.000Z">
+<meta property="article:modified_time" content="2022-02-07T15:47:43.507Z">
 <meta property="article:author" content="Henan Yuan">
-<meta property="article:tag" content="C++ 计算机视觉 三维视觉 Opencv">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/02/07/nu7lU6aXmGbODTY.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Yuan H.N" type="application/atom+xml">
   
@@ -143,36 +147,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-C-设计模式（三）——策略模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      C++设计模式（三）——策略模式
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+
+        
+        <a href="/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
   	<time datetime="2022-02-07T15:47:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-07</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">C++设计模式（三）——策略模式</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="C-设计模式（三）——策略模式"><a href="#C-设计模式（三）——策略模式" class="headerlink" title="C++设计模式（三）——策略模式"></a>C++设计模式（三）——策略模式</h3><h4 id="策略模式的动机"><a href="#策略模式的动机" class="headerlink" title="策略模式的动机"></a>策略模式的动机</h4><p>  在软件构建过程中，某些对象使用的算法可能多种多样，经常改变，如果将这些算法都编码到对象中，将会使对象变得异常复杂；而且有时候支持不使用的算法也是一个性能负担。这个性能负担主要是指在分支语句或者判断语句中，特定的场景会冗余很多的代码不被使用，这点会影响程序的性能。</p>
+<h4 id="场景说明"><a href="#场景说明" class="headerlink" title="场景说明"></a>场景说明</h4><p>  现有一个程序用于计算不同国家的税，不同国家的税法有着不同的计算方式，所以一个初级的写法可以书写出如下所示的代码：</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">  <span class="class"><span class="keyword">enum</span> <span class="title">TaxBase</span> &#123;</span></span><br><span class="line">	CN_Tax,</span><br><span class="line">	US_Tax,</span><br><span class="line">	DE_Tax,</span><br><span class="line">	FR_Tax       <span class="comment">//更改</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SalesOrder</span>&#123;</span></span><br><span class="line">    TaxBase tax;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">CalculateTax</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (tax == CN_Tax)&#123;</span><br><span class="line">            <span class="comment">//CN***********</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (tax == US_Tax)&#123;</span><br><span class="line">            <span class="comment">//US***********</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (tax == DE_Tax)&#123;</span><br><span class="line">            <span class="comment">//DE***********</span></span><br><span class="line">        &#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (tax == FR_Tax)&#123;  <span class="comment">//更改</span></span><br><span class="line">			<span class="comment">//...</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//....</span></span><br><span class="line">     &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+<p>  该做法乍一看并无很大问题，但对于软件设计而言，需要动态的去看软件的设计和开发。如果动态的去考察这个问题，就会有一些明显的问题，例如将来是否会加入日本等其他国家的税计算方式，要完成这样的需求，需要增加枚举类型和增加<code>if-else</code>语句。这就违背了一个设计原则：即开放封闭原则，对扩展开放对更改封闭，类模块应以扩展的方式应对变化而非修改源代码。<br>  再看另一种利用策略模式更改后的代码，代码如下所示：</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TaxStrategy</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">Calculate</span><span class="params">(<span class="keyword">const</span> Context&amp; context)</span></span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">TaxStrategy</span>()&#123;&#125;<span class="comment">//C++中的基类，析构函数最好被声明为虚函数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CNTax</span> :</span> <span class="keyword">public</span> TaxStrategy&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">Calculate</span><span class="params">(<span class="keyword">const</span> Context&amp; context)</span></span>&#123;</span><br><span class="line">        <span class="comment">//***********</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">USTax</span> :</span> <span class="keyword">public</span> TaxStrategy&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">Calculate</span><span class="params">(<span class="keyword">const</span> Context&amp; context)</span></span>&#123;</span><br><span class="line">        <span class="comment">//***********</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DETax</span> :</span> <span class="keyword">public</span> TaxStrategy&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">Calculate</span><span class="params">(<span class="keyword">const</span> Context&amp; context)</span></span>&#123;</span><br><span class="line">        <span class="comment">//***********</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//扩展</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FRTax</span> :</span> <span class="keyword">public</span> TaxStrategy&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">Calculate</span><span class="params">(<span class="keyword">const</span> Context&amp; context)</span></span>&#123;</span><br><span class="line">		<span class="comment">//.........</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SalesOrder</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    TaxStrategy* strategy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">SalesOrder</span>(StrategyFactory* strategyFactory)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;strategy = strategyFactory-&gt;<span class="built_in">NewStrategy</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">SalesOrder</span>()&#123;</span><br><span class="line">        <span class="keyword">delete</span> <span class="keyword">this</span>-&gt;strategy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">CalculateTax</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        <span class="function">Context <span class="title">context</span><span class="params">()</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">double</span> val = </span><br><span class="line">            strategy-&gt;<span class="built_in">Calculate</span>(context); <span class="comment">//多态调用</span></span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>  <strong>代码分析：</strong>首先定义一个基类<code>TaxStrategy</code>，该基类的析构函数被声明为一个虚函数，这是良好的习惯，否则多态的<code>delete</code>会出现问题。接下来不同国家的税法计算方式都继承该基类，并重写（override）<code>virtual double Calculate(const Context&amp; context)</code>的虚函数。最后定义一个<code>SalesOrder</code>类，该类有一个TaxStrategy指针对象（该对象一般通过工厂模式被创建出来），利用多态性完成不同税法的计算。<br>  <strong>对比两种做法：</strong>两种做法都能实现不同税法的计算，都完成了软件的业务功能。考虑一种情况，随着时间的流逝，需要增加法国的税法计算，策略模式只需增加一个新的文件里增加一个新的类，其他的代码无需改变，者遵循了开放封闭原则。代码复用指二进制级别的复用、编译单位的复用而非仅仅是代码的复制粘贴。</p>
+<h4 id="GOF对策略模式的定义"><a href="#GOF对策略模式的定义" class="headerlink" title="GOF对策略模式的定义"></a>GOF对策略模式的定义</h4><p>  定义一系列算法，把它们一个个封装起来，并且使它们可互相替换（变化）。该模式<strong>使得算法可独立于使用它的客户程序(稳定)而变化（扩展，子类化）</strong>。</p>
+<h4 id="策略模式结构图"><a href="#策略模式结构图" class="headerlink" title="策略模式结构图"></a>策略模式结构图</h4><p><img src="https://s2.loli.net/2022/02/07/nu7lU6aXmGbODTY.jpg" alt="策略模式.jpg"></p>
+<h4 id="策略模式总结"><a href="#策略模式总结" class="headerlink" title="策略模式总结"></a>策略模式总结</h4><ul>
+<li>Strategy及其子类为组件提供了一系列可重用的算法，从而可以使得类型在运行时方便地根据需要在各个算法之间进行切换。</li>
+<li>Strategy模式提供了用条件判断语句以外的另一种选择，消除条件判断语句，就是在解耦合。<strong>含有许多条件判断语句的代码</strong>通常都需要Strategy模式。多个判断语句的出现是使用策略模式的标志，但也绝非有多个判断语句出现就一定要使用策略模式，例如在判断语句的次数是固定的，这种场景就不宜使用策略模式。</li>
+<li>如果Strategy对象没有实例变量，那么各个上下文可以共享同一个Strategy对象，从而节省对象开销。利用判断语句或者分支语句解决问题在本例中存在太多的条件分支，而税的计算仅仅在指定的国家仅需一种方式，例如在中国，其他国家的税法就未被使用到，这些判断语句会带来性能负担。策略模式中每个国家的税法计算，也可以使用单例的方式进行改进。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -184,236 +201,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94template-method/" class="archive-article-date">
-  	<time datetime="2022-02-07T07:45:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-07</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94template-method/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++设计模式（二）——template method</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94template-method/">C++设计模式（二）——template method</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2022-02-05T14:56:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89/">设计模式（一）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/04/Git%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2022-02-04T02:28:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/04/Git%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/">Git错误记录</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">错误记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/03/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2022-02-03T14:07:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/03/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">C++设计模式——工厂模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/01/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2022-02-01T15:45:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/01/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">Git基本使用教程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">工具使用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/01/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E8%AF%9E%E7%94%9F%E7%9A%84%EF%BC%9F/" class="archive-article-date">
-  	<time datetime="2022-02-01T07:20:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/01/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E8%AF%9E%E7%94%9F%E7%9A%84%EF%BC%9F/">这个博客是如何诞生的？</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -436,8 +323,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
