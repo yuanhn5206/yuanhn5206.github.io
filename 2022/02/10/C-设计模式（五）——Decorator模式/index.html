@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022/2 | Yuan H.N</title>
+  <title>C++设计模式（五）——Decorator模式 | Yuan H.N</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C++、计算机三维视觉、机器人">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yuan H.N">
-<meta property="og:url" content="http://example.com/archives/2022/02/index.html">
+  <meta name="description" content="C++设计模式——装饰器模式（decorator）“单一职责”模式​        在软件组件的设计中，如果责任划分的不清晰，使用继承得到的结果往往是随着需求的变化，子类急剧膨胀，同时充斥着重复代码，(这两点是代码的bad smell)这时候的关键是划清责任。 “单一职责”模式常用的设计模式 Decorator Bridge  Decorator使用动机 在某些情况下我们可能会“过度地使用继承来扩">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++设计模式（五）——Decorator模式">
+<meta property="og:url" content="http://example.com/2022/02/10/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Decorator%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Yuan H.N">
-<meta property="og:description" content="C++、计算机三维视觉、机器人">
+<meta property="og:description" content="C++设计模式——装饰器模式（decorator）“单一职责”模式​        在软件组件的设计中，如果责任划分的不清晰，使用继承得到的结果往往是随着需求的变化，子类急剧膨胀，同时充斥着重复代码，(这两点是代码的bad smell)这时候的关键是划清责任。 “单一职责”模式常用的设计模式 Decorator Bridge  Decorator使用动机 在某些情况下我们可能会“过度地使用继承来扩">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2022/02/10/I2PTHzXmS7FgCcW.jpg">
+<meta property="article:published_time" content="2022-02-10T05:46:43.000Z">
+<meta property="article:modified_time" content="2022-02-10T05:46:56.027Z">
 <meta property="article:author" content="Henan Yuan">
-<meta property="article:tag" content="C++ 计算机视觉 三维视觉 Opencv">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/02/10/I2PTHzXmS7FgCcW.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Yuan H.N" type="application/atom+xml">
   
@@ -143,36 +147,62 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-C-设计模式（五）——Decorator模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      C++设计模式（五）——Decorator模式
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/10/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Decorator%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+
+        
+        <a href="/2022/02/10/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Decorator%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
   	<time datetime="2022-02-10T05:46:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-10</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/10/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Decorator%E6%A8%A1%E5%BC%8F/">C++设计模式（五）——Decorator模式</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="C-设计模式——装饰器模式（decorator）"><a href="#C-设计模式——装饰器模式（decorator）" class="headerlink" title="C++设计模式——装饰器模式（decorator）"></a>C++设计模式——装饰器模式（decorator）</h3><h4 id="“单一职责”模式"><a href="#“单一职责”模式" class="headerlink" title="“单一职责”模式"></a>“单一职责”模式</h4><p>​        在软件组件的设计中，如果责任划分的不清晰，使用继承得到的结果往往是随着需求的变化，<strong>子类急剧膨胀，同时充斥着重复代码，</strong>(这两点是代码的bad smell)这时候的关键是划清责任。</p>
+<h4 id="“单一职责”模式常用的设计模式"><a href="#“单一职责”模式常用的设计模式" class="headerlink" title="“单一职责”模式常用的设计模式"></a>“单一职责”模式常用的设计模式</h4><ul>
+<li>Decorator</li>
+<li>Bridge</li>
+</ul>
+<h4 id="Decorator使用动机"><a href="#Decorator使用动机" class="headerlink" title="Decorator使用动机"></a>Decorator使用动机</h4><ul>
+<li>在某些情况下我们可能会“过度地使用继承来扩展对象的功能”，由于继承为类型引入的静态特质，使得这种扩展方式缺乏灵活性；并且随着子类的增多（扩展功能的增多），各种子类的组合（扩展功能的组合）会导致更多子类的膨胀。</li>
+<li>如何使“对象功能的扩展”能够根据需要来动态地实现？同时避免“扩展功能的增多”带来的子类膨胀问题？从而使得任何“功能扩展变化”所导致的影响将为最低  ？</li>
+</ul>
+<h4 id="伪代码示例——“流”IO库的设计"><a href="#伪代码示例——“流”IO库的设计" class="headerlink" title="伪代码示例——“流”IO库的设计"></a>伪代码示例——“流”IO库的设计</h4><p>​        首先写出一个“流”类的基类，然后不同的流操作（文件流、网络流等）继承该基类并重写所有的纯虚函数，所以可以写出如下的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//业务操作</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stream</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>：</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>=<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>=<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>=<span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Stream</span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//主体类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileStream</span>:</span> <span class="keyword">public</span> Stream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        <span class="comment">//读文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定位文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//写文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NetworkStream</span> :</span><span class="keyword">public</span> Stream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        <span class="comment">//读网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定位网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//写网络流</span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MemoryStream</span> :</span><span class="keyword">public</span> Stream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        <span class="comment">//读内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定位内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+<p>​        当需要考虑为该类添加加密的需求以及一些额外的扩展操作时，又需要对各种流的操作添加加密操作，加密的操作是一样的，但流的读取操作方式是不一样的。所以写出一下的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//扩展操作</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CryptoFileStream</span> :</span><span class="keyword">public</span> FileStream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">       </span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        FileStream::<span class="built_in">Read</span>(number);<span class="comment">//读文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        FileStream::<span class="built_in">Seek</span>(position);<span class="comment">//定位文件流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(byte data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        FileStream::<span class="built_in">Write</span>(data);<span class="comment">//写文件流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CryptoNetworkStream</span> :</span> :<span class="keyword">public</span> NetworkStream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        NetworkStream::<span class="built_in">Read</span>(number);<span class="comment">//读网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        NetworkStream::<span class="built_in">Seek</span>(position);<span class="comment">//定位网络流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(byte data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        NetworkStream::<span class="built_in">Write</span>(data);<span class="comment">//写网络流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CryptoMemoryStream</span> :</span> <span class="keyword">public</span> MemoryStream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        MemoryStream::<span class="built_in">Read</span>(number);<span class="comment">//读内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        MemoryStream::<span class="built_in">Seek</span>(position);<span class="comment">//定位内存流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(byte data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        MemoryStream::<span class="built_in">Write</span>(data);<span class="comment">//写内存流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BufferedFileStream</span> :</span> <span class="keyword">public</span> FileStream&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BufferedNetworkStream</span> :</span> <span class="keyword">public</span> NetworkStream&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BufferedMemoryStream</span> :</span> <span class="keyword">public</span> MemoryStream&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CryptoBufferedFileStream</span> :</span><span class="keyword">public</span> FileStream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        <span class="comment">//额外的缓冲操作...</span></span><br><span class="line">        FileStream::<span class="built_in">Read</span>(number);<span class="comment">//读文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        <span class="comment">//额外的缓冲操作...</span></span><br><span class="line">        FileStream::<span class="built_in">Seek</span>(position);<span class="comment">//定位文件流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        <span class="comment">//额外的缓冲操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(byte data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        <span class="comment">//额外的缓冲操作...</span></span><br><span class="line">        FileStream::<span class="built_in">Write</span>(data);<span class="comment">//写文件流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        <span class="comment">//额外的缓冲操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Process</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//编译时装配</span></span><br><span class="line">    CryptoFileStream *fs1 = <span class="keyword">new</span> <span class="built_in">CryptoFileStream</span>();</span><br><span class="line">    BufferedFileStream *fs2 = <span class="keyword">new</span> <span class="built_in">BufferedFileStream</span>();</span><br><span class="line">    CryptoBufferedFileStream *fs3 =<span class="keyword">new</span> <span class="built_in">CryptoBufferedFileStream</span>();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        <strong>代码分析：</strong>这样的实现方式有问题。当不同的操作出现时，子类会急剧膨胀，且对于不同的流的操作，增加部分，例如加密操作代码重复度高。继承使得子类代码急剧膨胀，随着需求的增加和不同的流操作组合，越来越多的子类会产生，所以应该适当的做出改变，一种稍好的做法可以做出如下更改：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//业务操作</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stream</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>=<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>=<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>=<span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Stream</span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//主体类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileStream</span>:</span> <span class="keyword">public</span> Stream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        <span class="comment">//读文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定位文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//写文件流</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NetworkStream</span> :</span><span class="keyword">public</span> Stream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        <span class="comment">//读网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定位网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//写网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MemoryStream</span> :</span><span class="keyword">public</span> Stream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        <span class="comment">//读内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定位内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//扩展操作</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CryptoStream</span>:</span> <span class="keyword">public</span> Stream &#123;</span><br><span class="line">    </span><br><span class="line">    Stream* stream;<span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CryptoStream</span>(Stream* stm):<span class="built_in">stream</span>(stm)&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">       </span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        stream-&gt;<span class="built_in">Read</span>(number);<span class="comment">//读文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        stream::<span class="built_in">Seek</span>(position);<span class="comment">//定位文件流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(byte data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        stream::<span class="built_in">Write</span>(data);<span class="comment">//写文件流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BufferedStream</span> :</span> <span class="keyword">public</span> Stream&#123;</span><br><span class="line">    </span><br><span class="line">    Stream* stream;<span class="comment">//...</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">BufferedStream</span>(Stream* stm):<span class="built_in">stream</span>(stm)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Process</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//运行时装配</span></span><br><span class="line">    FileStream* s1=<span class="keyword">new</span> <span class="built_in">FileStream</span>();</span><br><span class="line">    CryptoStream* s2=<span class="keyword">new</span> <span class="built_in">CryptoStream</span>(s1);</span><br><span class="line">    </span><br><span class="line">    BufferedStream* s3=<span class="keyword">new</span> <span class="built_in">BufferedStream</span>(s1);</span><br><span class="line">    </span><br><span class="line">    BufferedStream* s4=<span class="keyword">new</span> <span class="built_in">BufferedStream</span>(s2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        <strong>代码分析：</strong>如上所示的方法中，为<code>CryptoStream</code>添加了一个成员变量<code>Stream* stream</code>，这样就可以消除其他的子类，因为代码是重复的，故只需留下一个类，利用C++语言的多态性来实现对不同流的加密，同理，其他的<code>BufferedStream</code>也用同样的思想进行简化。这里需要注意的是，<code>CryptoStream</code>继承了<code>Stream</code>类，这是为了实现多态性故意为之。写在这里，之前的问题已经的到了很大的缓解。并遵循了“宁以组合代替继承”的设计原则。这样做已经非常好了，但依旧有可改进的空间，利用decorator模式再对此代码进行改进，就可以得到如下所示的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//业务操作</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stream</span>&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>=<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>=<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>=<span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Stream</span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//主体类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileStream</span>:</span> <span class="keyword">public</span> Stream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        <span class="comment">//读文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定位文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//写文件流</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NetworkStream</span> :</span><span class="keyword">public</span> Stream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        <span class="comment">//读网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定位网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//写网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MemoryStream</span> :</span><span class="keyword">public</span> Stream&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">        <span class="comment">//读内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定位内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(<span class="keyword">char</span> data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//扩展操作</span></span><br><span class="line"></span><br><span class="line">DecoratorStream: <span class="keyword">public</span> Stream&#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    Stream* stream;<span class="comment">//...</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">DecoratorStream</span>(Stream * stm):<span class="built_in">stream</span>(stm)&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CryptoStream</span>:</span> <span class="keyword">public</span> DecoratorStream &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CryptoStream</span>(Stream* stm):<span class="built_in">DecoratorStream</span>(stm)&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">char</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">       </span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        stream-&gt;<span class="built_in">Read</span>(number);<span class="comment">//读文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        stream::<span class="built_in">Seek</span>(position);<span class="comment">//定位文件流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Write</span><span class="params">(byte data)</span></span>&#123;</span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">        stream::<span class="built_in">Write</span>(data);<span class="comment">//写文件流</span></span><br><span class="line">        <span class="comment">//额外的加密操作...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BufferedStream</span> :</span> <span class="keyword">public</span> DecoratorStream&#123;</span><br><span class="line">    </span><br><span class="line">    Stream* stream;<span class="comment">//...</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">BufferedStream</span>(Stream* stm):<span class="built_in">DecoratorStream</span>(stm)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Process</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//运行时装配</span></span><br><span class="line">    FileStream* s1=<span class="keyword">new</span> <span class="built_in">FileStream</span>();</span><br><span class="line">    </span><br><span class="line">    CryptoStream* s2=<span class="keyword">new</span> <span class="built_in">CryptoStream</span>(s1);</span><br><span class="line">    </span><br><span class="line">    BufferedStream* s3=<span class="keyword">new</span> <span class="built_in">BufferedStream</span>(s1);</span><br><span class="line">    </span><br><span class="line">    BufferedStream* s4=<span class="keyword">new</span> <span class="built_in">BufferedStream</span>(s2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="GOF对装饰器模式的定义"><a href="#GOF对装饰器模式的定义" class="headerlink" title="GOF对装饰器模式的定义"></a>GOF对装饰器模式的定义</h4><p>​        动态（组合）地给一个对象增加一些额外的职责。就增加功能而言，Decorator模式比生成子类（继承）更为灵活（消除重复代码 &amp; 减少子类个数）。（组合优于继承的典型体现）</p>
+<h4 id="Decorator模式结构图"><a href="#Decorator模式结构图" class="headerlink" title="Decorator模式结构图"></a>Decorator模式结构图</h4><p><img src="https://s2.loli.net/2022/02/10/I2PTHzXmS7FgCcW.jpg" alt="decorator.jpg"></p>
+<h4 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h4><ul>
+<li>通过采用组合而非继承的手法， Decorator模式实现了在运行时动态扩展对象功能的能力，而且可以根据需要扩展多个功能。避免了使用继承带来的“灵活性差”和“多子类衍生问题”。</li>
+<li>Decorator类在接口上表现为is-a Component的继承关系，即Decorator类继承了Component类所具有的接口。但在实现上又表现为has-a Component的组合关系，即Decorator类又使用了另外一个Component类。一个类即继承又组合，那么这个类大概率使用了decorator的设计模式。</li>
+<li>Decorator模式的目的并非解决“多子类衍生的多继承”问题，Decorator模式应用的要点在于解决“主体类在多个方向上的扩展功能”——是为“装饰”的含义。  </li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -184,312 +214,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/10/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Decorator%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/08/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F-%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2022-02-08T12:45:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-08</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/02/08/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F-%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++设计模式（四）——观察者模式/事件模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/08/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F-%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%BC%8F/">C++设计模式（四）——观察者模式/事件模式</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2022-02-07T15:47:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">C++设计模式（三）——策略模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94template-method/" class="archive-article-date">
-  	<time datetime="2022-02-07T07:45:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/07/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94template-method/">C++设计模式（二）——template method</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2022-02-05T14:56:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89/">设计模式（一）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/04/Git%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2022-02-04T02:28:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/04/Git%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/">Git错误记录</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">错误记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/03/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2022-02-03T14:07:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/03/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">C++设计模式——工厂模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/01/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2022-02-01T15:45:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/01/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">Git基本使用教程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">工具使用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/01/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E8%AF%9E%E7%94%9F%E7%9A%84%EF%BC%9F/" class="archive-article-date">
-  	<time datetime="2022-02-01T07:20:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/01/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E8%AF%9E%E7%94%9F%E7%9A%84%EF%BC%9F/">这个博客是如何诞生的？</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -512,8 +336,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
