@@ -145,6 +145,134 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-代码整洁之道（一）——命名" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/02/14/%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%91%BD%E5%90%8D/">代码整洁之道（一）——命名</a>
+    </h1>
+  
+
+        
+        <a href="/2022/02/14/%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%91%BD%E5%90%8D/" class="archive-article-date">
+  	<time datetime="2022-02-14T12:39:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="代码整洁（一）——命名"><a href="#代码整洁（一）——命名" class="headerlink" title="代码整洁（一）——命名"></a>代码整洁（一）——命名</h2><h3 id="名副其实"><a href="#名副其实" class="headerlink" title="名副其实"></a>名副其实</h3><p>变量、函数或类的名称应该已经答复了所有的大问题。它应该告诉你，它为什么存在，它做什么事，应该怎么用，如果名称需要注释来补充，那就不算<strong>名副其实</strong>，例如如下所示的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> d; <span class="comment">// 消逝的时间，以日计</span></span><br></pre></td></tr></table></figure>
+
+<p>名称<code>d</code>什么也没说明，无法体现“名副其实”的特征，我们应该选择指明计量对象和计量单位的名称：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> elapsedTimeInDays;</span><br><span class="line"><span class="keyword">int</span> daysSinceCreation;</span><br><span class="line"><span class="keyword">int</span> daysSinceModification;</span><br><span class="line"><span class="keyword">int</span> fileAgeInDays;</span><br></pre></td></tr></table></figure>
+
+<p>选择体现本意的名称能让人更容易理解代码和修改代码。<br>再看一个例子，阅读代码段的人是否能判断下列的代码的目的何在？</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// version 1 基本是伪代码，意会其中的道理即可</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">List&lt;<span class="keyword">int</span>[]&gt; <span class="title">getThem</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;<span class="keyword">int</span>[]&gt; list1 = <span class="keyword">new</span> List&lt;<span class="keyword">int</span>[]&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span>[] x : theList)&#123;</span><br><span class="line">            <span class="keyword">if</span>(x[<span class="number">0</span>] == <span class="number">4</span>)</span><br><span class="line">                list1.<span class="built_in">add</span>(x);</span><br><span class="line">        <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>看到这样的代码你可能就会发出疑问四连：</p>
+<ol>
+<li>theList是什么类型的东西？</li>
+<li>theList的零下标代表什么？</li>
+<li>值4的意义是什么？</li>
+<li>我该怎么使用返回的列表？</li>
+</ol>
+<p>假设这段代码出现在扫雷游戏中，扫雷游戏的盘面是名为theList的单元格列表，那么就将其命名为<code>gameBoard</code>，零下标代表一种状态值，状态值4代表“已标记”。只要改为有意义的名称，就可以改进出第二个版本，如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// version 2 改进命名后的代码</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">List&lt;<span class="keyword">int</span>[]&gt; <span class="title">getFlaggedCells</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;<span class="keyword">int</span>[]&gt; flaggedCells = <span class="keyword">new</span> List&lt;<span class="keyword">int</span>[]&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span>[] cell : gameBoard)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cell[STATUS_VALUE] == FLAGGED)</span><br><span class="line">                flaggedCells.<span class="built_in">add</span>(cell);</span><br><span class="line">        <span class="keyword">return</span> flaggedCells;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>进一步的，不用<code>int</code>数组表示单元格，而是另写一个类<code>Cell</code>。该类包含一个成员函数<code>isFlagged</code>，于是得到最后的一个版本：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// version 3 最终版本</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">List&lt;Cell&gt; <span class="title">getFlaggedCells</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;Cell&gt; flaggedCells = <span class="keyword">new</span> List&lt;Cell&gt;();</span><br><span class="line">        <span class="keyword">for</span>(Cell cell : gameBoard)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cell.<span class="built_in">isFlagged</span>())</span><br><span class="line">                flaggedCells.<span class="built_in">add</span>(cell);</span><br><span class="line">        <span class="keyword">return</span> flaggedCells;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="避免误导"><a href="#避免误导" class="headerlink" title="避免误导"></a>避免误导</h3><p>应当避免使用与本意相悖的词。例如hp、aix和sco都不应该用作变量名，它们都是UNIX平台的专用名称，可能提供误导性的信息。<br>别用<code>accountList</code>来指称一组账号，除非它真的是<code>List</code>类型。<code>List</code>一词对程序员有特殊的意义。所以用<code>accountGroup</code>或者<code>bunchOfAccount</code>，甚至直接使用<code>account</code>都会更好一些。<br>提防使用不同之处较小的名称。例如<code>XYZControllerForEfficientHandlingOfStrings</code>和<code>XYZControllerForEfficientStorgeOfStrings</code>。需要花时间进行比对，这两个词实在太相似了。</p>
+<h3 id="做有意义的区分"><a href="#做有意义的区分" class="headerlink" title="做有意义的区分"></a>做有意义的区分</h3><p>以数字系列命名就是依照变量的含义命名的对立。这样的名称纯属误导——完全没有提供正确的信息，如下代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copy</span><span class="params">(<span class="keyword">char</span> a1[], <span class="keyword">char</span> a2[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a1.length; i++)&#123;</span><br><span class="line">        a2[i] = a1[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果将参数名改为<code>source</code>和<code>destination</code>，函数就好看很多，如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copy</span><span class="params">(<span class="keyword">char</span> source[], <span class="keyword">char</span> destination[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; source.length; i++)&#123;</span><br><span class="line">        destination[i] = source[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>废话是另一种没有意义的区分。例如这三个类：<code>Product</code>、<code>ProductInfo</code>、<code>ProductData</code>类，他们的名称不同，意思却无区别。</p>
+<blockquote>
+<p>注意只要体现出意义的区分，使用a或者the这样的前缀就没有问题。例将a用于局部变量，而把the用于函数参数。</p>
+</blockquote>
+<p>废话都是冗余的。Variable一词永远不要用于变量名中，Table一词永远不应当出现在表名中。要区分名称，就要以代码阅读者能鉴别不同之处的方式来区分。</p>
+<h3 id="使用读得出来的名称"><a href="#使用读得出来的名称" class="headerlink" title="使用读得出来的名称"></a>使用读得出来的名称</h3><p>使用读得出来的名称易于开发者之间的沟通~~~，不同的开发人员读出相应的变量就可以定位相应的变量声明。</p>
+<h3 id="使用可搜索的名称"><a href="#使用可搜索的名称" class="headerlink" title="使用可搜索的名称"></a>使用可搜索的名称</h3><p>使用可搜索的名称的目的是当你按下<code>ctrl+F</code>开发人员可以快速的定位变量位置。在程序中搜索a、7等数值，会出现在不同的文件不同的位置中，比较下列两段代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">34</span>; ++j)&#123;</span><br><span class="line">    s += (t[j] * <span class="number">4</span>) / <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和下列代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> realDaysperIdealDay = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> WORK_DAYS_PER_WEEK = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NUMBER_OF_TASKS; j++)&#123;</span><br><span class="line">    <span class="keyword">int</span> realTaskDays = taskEstimate[j] * realDaysperIdealDay;</span><br><span class="line">    <span class="keyword">int</span> realTaskWeeks = (realdays / WORK_DAYS_PER_WEEK);</span><br><span class="line">    sum += realTaskWeeks;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二个代码更易于搜索定位。</p>
+<h3 id="避免使用编码"><a href="#避免使用编码" class="headerlink" title="避免使用编码"></a>避免使用编码</h3><h4 id="1-匈牙利语标记法（HN）"><a href="#1-匈牙利语标记法（HN）" class="headerlink" title="1. 匈牙利语标记法（HN）"></a>1. 匈牙利语标记法（HN）</h4><p>如今HN和其他类型编码形式都纯属多余，他们增加了修改变量、函数或者类的名称或者类型的难度。</p>
+<h4 id="2-成员前缀"><a href="#2-成员前缀" class="headerlink" title="2. 成员前缀"></a>2. 成员前缀</h4><p>也不必用<code>m_</code>前缀来标明成员变量。（？？？这里我有些怀疑，因为看很多源码都遵循这样的命名风格），应当把类做的足够小，消除对成员前缀的需要。你应该使用某种可以高亮或用颜色标出成员的编辑环境。代码读得越多，眼中就越没有前缀。</p>
+<h4 id="3-接口和实现"><a href="#3-接口和实现" class="headerlink" title="3. 接口和实现"></a>3. 接口和实现</h4><p>尝试使用不加修饰的接口类</p>
+<h3 id="避免思维映射"><a href="#避免思维映射" class="headerlink" title="避免思维映射"></a>避免思维映射</h3><p>不应当让读者在脑中把你的名称翻译成他们熟知的名称。<strong>明确是王道，</strong>编写其他人能理解的代码。</p>
+<h3 id="类名"><a href="#类名" class="headerlink" title="类名"></a>类名</h3><p>类名应该是名词或者名词短语，不应该使用动词。避免使用<code>Manager</code>、<code>Processor</code>、<code>Data</code>和<code>Info</code>这样的类名。</p>
+<h3 id="方法名"><a href="#方法名" class="headerlink" title="方法名"></a>方法名</h3><p>方法名应该是动词或者动词短语，属性访问器、修改和判断应该加上<code>get-</code>、<code>set-</code>、<code>is-</code>的前缀。</p>
+<h3 id="不要卖萌"><a href="#不要卖萌" class="headerlink" title="不要卖萌"></a>不要卖萌</h3><p>言道意到，意到言到，宁可要明确命名，绝不要为了好玩。</p>
+<h3 id="每个概念对应一个词"><a href="#每个概念对应一个词" class="headerlink" title="每个概念对应一个词"></a>每个概念对应一个词</h3><p>给每个抽象概念选一个词，并一直保持这样的习惯。使用<code>fetch</code>，<code>retrieve</code>和<code>get</code>来给多个类中的同种方法命名，你怎么记得住哪个类中的那个方法呢？一以贯之的命名是天降福音。</p>
+<h3 id="别用双关语"><a href="#别用双关语" class="headerlink" title="别用双关语"></a>别用双关语</h3><p>避免一个单词用于不同的目的，同一术语用于不同的概念，基本上就是双关语了。应当遵循“一词一意”。</p>
+<h3 id="使用解决方案领域名称"><a href="#使用解决方案领域名称" class="headerlink" title="使用解决方案领域名称"></a>使用解决方案领域名称</h3><p>记住，只有程序员阅读你的代码，所以尽量使用那些计算机科学术语、算法名、模式名、数学术语。</p>
+<h3 id="使用源自所涉问题领域的名称"><a href="#使用源自所涉问题领域的名称" class="headerlink" title="使用源自所涉问题领域的名称"></a>使用源自所涉问题领域的名称</h3><p>如果不能使用程序员所熟悉的术语来给手头的工作命名，就采用从所涉及的问题的领域而来的名称吧。</p>
+<h3 id="添加有意义的语境"><a href="#添加有意义的语境" class="headerlink" title="添加有意义的语境"></a>添加有意义的语境</h3><p>多数名称难以做到自我说明，，你需要用良好命名的类、函数或者命名空间来放置名称，给代码的阅读者提供语境</p>
+<h3 id="不要添加没用的语境"><a href="#不要添加没用的语境" class="headerlink" title="不要添加没用的语境"></a>不要添加没用的语境</h3><p>防止你的IDE给你过多的提示，这么做并不是一个聪明的做法。只要简短的名称足够清楚，就比长名称好。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">代码整洁</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/02/14/%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%91%BD%E5%90%8D/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-C-设计模式（五）——Decorator模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1532,11 +1660,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">错误记录</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+                <a href="javascript:void(0)" class="js-tag color5">代码整洁</a>
               </li>
             
             <div class="clearfix"></div>
