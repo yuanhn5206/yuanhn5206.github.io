@@ -145,6 +145,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Git错误记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/02/04/Git%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/">Git错误记录</a>
+    </h1>
+  
+
+        
+        <a href="/2022/02/04/Git%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" class="archive-article-date">
+  	<time datetime="2022-02-04T02:28:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-错误描述"><a href="#1-错误描述" class="headerlink" title="1 错误描述"></a>1 错误描述</h4><blockquote>
+<p>error: failed to push some refsto‘远程仓库地址’</p>
+</blockquote>
+<h4 id="2-错误原因"><a href="#2-错误原因" class="headerlink" title="2 错误原因"></a>2 错误原因</h4><p>​    在创建仓库的时候，都会勾选“使用Reamdme文件初始化这个仓库”这个操作初识了一个README文件并配置添加了忽略文件。当点击创建仓库时，它会帮我们做一次初始提交。于是我们的仓库就有了README.m和.gitignore文件，然后我们把本地项目关联到这个仓库，并把项目推送到仓库时，我们在关联本地与远程时，两端都是有内容的，但是这两份内容并没有联系，当我们推送到远程或者从远程拉取内容时，都会有没有被跟踪的内容，于是你看git报的详细错误中总是会让你先拉取再推送，但是拉取总是失败。</p>
+<h4 id="3-解决方案"><a href="#3-解决方案" class="headerlink" title="3 解决方案"></a>3 解决方案</h4><h5 id="3-1-方法一"><a href="#3-1-方法一" class="headerlink" title="3.1 方法一"></a>3.1 方法一</h5><p>1 使用如下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase origin master</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2 然后再进行上传:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>即可推送成功</p>
+<h5 id="3-2-方法二"><a href="#3-2-方法二" class="headerlink" title="3.2 方法二"></a>3.2 方法二</h5><ul>
+<li><p>想要避免这种问题，就要保持创建的仓库是一个空仓库，什么都没有。</p>
+</li>
+<li><p>就是创建仓库的时候不要勾选“使用Readme文件初始化这个仓库”</p>
+</li>
+<li><p>然后克隆下来方便使用，下次要推送就直接可以推送上去了。</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">错误记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/02/04/Git%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-C-设计模式——工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -805,6 +897,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">智能指针</a>
               </li>
             
             <div class="clearfix"></div>

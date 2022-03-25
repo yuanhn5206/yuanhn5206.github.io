@@ -145,6 +145,192 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C-的智能指针和Boost的智能指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/25/C-%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E5%92%8CBoost%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">C++的智能指针和Boost的智能指针</a>
+    </h1>
+  
+
+        
+        <a href="/2022/03/25/C-%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E5%92%8CBoost%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" class="archive-article-date">
+  	<time datetime="2022-03-25T12:43:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="C-的智能指针和Boost的智能指针"><a href="#C-的智能指针和Boost的智能指针" class="headerlink" title="C++的智能指针和Boost的智能指针"></a>C++的智能指针和Boost的智能指针</h3><h4 id="1-smart-ptr库如何改进你的程序？"><a href="#1-smart-ptr库如何改进你的程序？" class="headerlink" title="1. smart_ptr库如何改进你的程序？"></a>1. <code>smart_ptr</code>库如何改进你的程序？</h4><ul>
+<li>使用<code>shared_ptr</code>进行对象的生存期自动管理，使得分享资源所有权变得有效且安全。</li>
+<li>使用<code>weak_ptr</code>可以安全地观测共享资源，避免了悬挂的指针。</li>
+<li>使用<code>scoped_ptr</code>和<code>scoped_array</code>限制资源的使用范围，使得代码更易于编写和维护，并有助于写出异常安全的代码。</li>
+</ul>
+<pre><code>    智能指针解决了资源生存期管理的问题(尤其是动态分配的对象). 智能指针有各种不同的风格。多数都有一种共同的关键特性：自动资源管理。这种特性可能以不同的方式出现：如动态分配对象的生存期控制，和获取及释放资源 (文件, 网络连接)。Boost 的智能指针主要针对第一种情况，它们保存指向动态分配对象的指针，并在正确的时候删除这些对象。
+</code></pre>
+<h4 id="2-何时需要智能指针？"><a href="#2-何时需要智能指针？" class="headerlink" title="2. 何时需要智能指针？"></a>2. 何时需要智能指针？</h4><p>三种典型的情况：</p>
+<ul>
+<li><p>资源所有权的共享<br>共享所有权是指两个或多个对象 需要同时使用第三个对象的情况。这第三个对象应该如何(或者说何时)被释放？为了确保释放的时机是正确的，每个使用这个共享资源的对象必须互相知道对方，才能准确掌握源的释放时间。从设计或维护的观点来看，这种耦合是不可行的。更好的方法是让这些资源所有者将资源的生存期管理责任委派给一个智能指针。当没有共享者存在时，智能指针就可以安全地释放这个资源了。</p>
+</li>
+<li><p>要写异常安全的代码时<br>异常安全，简单地说就是在异常抛出时没有资源泄漏并保证程序状态的一致性。如果一个对象是动态分配的，当异常抛出时它不会被删除。由于栈展开以及指针离开作用域，资源可以会泄漏直至程序结束(即使是程序结束时的资源回收也不是语言所保证的)。不仅可能程序会由于内存泄漏而耗尽资源，程序的状态也可能变得混乱。智能指针可以自动地为你释放这些资源，即使是在异常发生的情况下。</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 补充代码块，auto_ptr的异常不安全</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>避免常见的错误，如资源泄漏</li>
+</ul>
+<p>​    避免常见的错误。忘记调用 <code>delete</code> 是书本中最古老的错误(至少在这本书中)。一个智能指针不关心程序中的控制路径；它只关心在它所指向的对象的生存期结束时删除它。使用智能指针，你不再需要知道何时删除对象。并且，智能指针隐藏了释放资源的细节，因此使用者不需要知道是否要调用 delete, 有些特殊的清除函数并不总是删除资源的。</p>
+<h4 id="3-Boost的智能指针——scoped-ptr和scoped-array"><a href="#3-Boost的智能指针——scoped-ptr和scoped-array" class="headerlink" title="3. Boost的智能指针——scoped_ptr和scoped_array"></a>3. Boost的智能指针——<code>scoped_ptr</code>和<code>scoped_array</code></h4><h5 id="3-1-scope-ptr"><a href="#3-1-scope-ptr" class="headerlink" title="3.1 scope_ptr"></a>3.1 <code>scope_ptr</code></h5><h6 id="3-1-1-头文件："><a href="#3-1-1-头文件：" class="headerlink" title="3.1.1 头文件："></a>3.1.1 头文件：</h6><p><code>&quot;boost/scoped_ptr.hpp&quot;</code></p>
+<h6 id="3-1-2-简介："><a href="#3-1-2-简介：" class="headerlink" title="3.1.2 简介："></a>3.1.2 简介：</h6><p>​    <code>boost::scoped_ptr</code> 用于确保能够正确地删除动态分配的对象。<code>scoped_ptr</code> 有着与 <code>std::auto_ptr</code> 类似的特性，而<strong>最大的区别在于它不能转让所有权</strong>而 <code>auto_ptr</code> 可以。事实上，<code>scoped_ptr</code> 永远不能被复制或被赋值！<code>scoped_ptr</code>是一种轻量级的指针；使用它不会使你的程序变大或者变慢。只会让你的代码更安全更易于维护。</p>
+<h6 id="3-1-3-源码摘要："><a href="#3-1-3-源码摘要：" class="headerlink" title="3.1.3 源码摘要："></a>3.1.3 源码摘要：</h6><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> boost &#123;</span><br><span class="line"> <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">scoped_ptr</span> :</span> noncopyable &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line"> <span class="function"><span class="keyword">explicit</span> <span class="title">scoped_ptr</span><span class="params">(T* p = <span class="number">0</span>)</span></span>; <span class="comment">//构造函数</span></span><br><span class="line"> ~<span class="built_in">scoped_ptr</span>(); <span class="comment">// 析构函数</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">(T* p = <span class="number">0</span>)</span></span>; </span><br><span class="line"> <span class="comment">// 操作符重载</span></span><br><span class="line"> T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span>; </span><br><span class="line"> T* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span>; </span><br><span class="line"> <span class="function">T* <span class="title">get</span><span class="params">()</span> <span class="keyword">const</span></span>; </span><br><span class="line"> </span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(scoped_ptr&amp; b)</span></span>; </span><br><span class="line"> &#125;;</span><br><span class="line"> <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </span></span><br><span class="line"><span class="function"> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(scoped_ptr&lt;T&gt; &amp; a, scoped_ptr&lt;T&gt; &amp; b)</span></span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>属性</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>explicit scoped_ptr(T* p=0)</code></td>
+<td>成员函数</td>
+<td align="left">构造函数，存储 p的一份拷贝。注意，p 必须是用<code>operator new</code> 分配的，或者是<code> null</code>. 在构造的时候，不要求T必须是一个完整的类型。当指针 p 是用某个分配函数的结果而不是直接调用 new 得到的时候很有用：因为这个类型不必是完整的，只需要类型 T 的一个前向声明就可以了。这个构造函数不会抛出异常</td>
+</tr>
+<tr>
+<td><code>~scoped_ptr()</code></td>
+<td>成员函数</td>
+<td align="left">删除被指物。类型 T 在被销毁时必须是一个完整的类型。如果 <code>scoped_ptr</code> 在它被析构时并没有保存资源，它就 什么都不做。这个析构函数不会抛出异常。</td>
+</tr>
+<tr>
+<td><code>void reset(T* p=0);</code></td>
+<td>成员函数</td>
+<td align="left">重置一个 <code>scoped_ptr </code>就是删除它已保存的指针，如果它有的话，并重新保存 p. 通常，资源的生存期管理应该完 全由<code>scoped_ptr</code> 自己处理，但是在极少数时候，资源需要在 <code>scoped_ptr</code> 的析构之前释放，或者 <code>scoped_ptr </code>要处理它原有资源外的另外一个资源。这时，就可以用 <code>reset</code>，<strong>但一定要尽量少用它。(过多地使 用它通常表示有设计方面的问题) 这个函数不会抛出异常。</strong></td>
+</tr>
+<tr>
+<td><code>T&amp; operator*() const;</code></td>
+<td>成员函数</td>
+<td align="left">返回保存的指针。如果保存的指针为空，则调用这个函数会导致未定义行为。如果不能肯定指针是否空的，最好使 用函数get。<strong>这个函数不会抛出异常</strong></td>
+</tr>
+<tr>
+<td><code>T* operator-&gt;() const;</code></td>
+<td>成员函数</td>
+<td align="left">返回保存的指针。如果保存的指针为空，则调用这个函数会导致未定义行为。如果不能肯定指针是否空的，最好使 用函数get。<strong>这个函数不会抛出异常</strong></td>
+</tr>
+<tr>
+<td><code>T* get() const;</code></td>
+<td>成员函数</td>
+<td align="left">返回保存的指针。应该小心地使用get，因为它可以直接操作裸指针。但是，get使得你可以测试保存的指针是否 为空。这个函数不会抛出异常。get通常用于调用那些需要裸指针的函数</td>
+</tr>
+<tr>
+<td><code>operator unspecified_bool_type() const</code></td>
+<td>成员函数</td>
+<td align="left">返回 <code>scoped_ptr </code>是否为非空。返回值的类型是未指明的，但这个类型可被用于 Boolean 的上下文中。在 if 语 句中最好使用这个类型转换函数，而不要用 get 去测试 scoped_ptr 的有效性</td>
+</tr>
+<tr>
+<td><code>void swap(scoped_ptr&amp; b)</code></td>
+<td>成员函数</td>
+<td align="left">交换两个<code>scoped_ptr</code>的内容。这个函数不会抛出异常</td>
+</tr>
+<tr>
+<td><code>template void swap(scoped_ptr&amp; a,scoped_ptr&amp; b)</code></td>
+<td>普通函数</td>
+<td align="left">这个函数提供了交换两个scoped pointer的内容的更好的方法。之所以说它更好，是因为 <code>swap(scoped1, scoped2)</code> 可以更广泛地用于很多指针类型，包括裸指针和第三方的智能指针。<code>scoped1.swap(scoped2)</code>则 只能用于它的定义所在的智能指针，而不能用于裸指针。</td>
+</tr>
+</tbody></table>
+<h6 id="3-1-4-用法："><a href="#3-1-4-用法：" class="headerlink" title="3.1.4 用法："></a>3.1.4 用法：</h6><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="function">boost::scoped_ptr&lt;std::string&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> std::string(<span class="string">&quot;this is a scope_ptr&quot;</span>))</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(p)</span><br><span class="line">        std::cout &lt;&lt; *p &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 利用智能指针调用字符串的成员函数</span></span><br><span class="line">    <span class="keyword">size_t</span> length = p-&gt;<span class="built_in">size</span>();</span><br><span class="line">    std::cout &lt;&lt; length &lt;&lt;std::endl;</span><br><span class="line">    <span class="comment">// 解引用的操作符</span></span><br><span class="line">    *p = <span class="string">&quot;hello scope_ptr&quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; *p &lt;&lt; std::endl;</span><br><span class="line">&#125;<span class="comment">// 离开作用域，scoped_ptr被销毁</span></span><br></pre></td></tr></table></figure>
+
+<p>​    <strong>不要手动删除</strong>，scoped_ptr 可以测试其有效性，就象一个普通指针那样，因为它提 供了隐式转换到一个可用于布尔表达式的类型的方法。其次，可以象使用裸指针那样调用被被指物的成员函数，因 为重载了<code> operator-&gt;</code>. 第三，也可以和裸指针一样解引用 <code>scoped_ptr</code>，这归功<code>operator*</code> 的重载。这些特 性正是 <code>scoped_ptr </code>和其它智能指针的用处所在，因为它们和裸指针的不同之处在于对生存期管理的语义上，而 不在于语法上。</p>
+<h6 id="3-1-5-auto-ptr和scope-ptr"><a href="#3-1-5-auto-ptr和scope-ptr" class="headerlink" title="3.1.5 auto_ptr和scope_ptr"></a>3.1.5 <code>auto_ptr</code>和<code>scope_ptr</code></h6><p>  <code>scoped_ptr</code> 与 <code>auto_ptr</code> 间的区别主要在于对拥有权的处理。<code>auto_ptr</code> 在复制时会从源 <code>auto_ptr</code> 自动交出拥有权，而 <code>scoped_ptr</code> 则不允许被复制。</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">scoped_vs_auto</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">boost::scoped_ptr&lt;std::string&gt; <span class="title">p_scope</span><span class="params">(<span class="keyword">new</span> std::string(<span class="string">&quot;Hello world&quot;</span>))</span></span>;</span><br><span class="line">    <span class="function">std::auto_ptr&lt;std::string&gt; <span class="title">p_auto</span><span class="params">(<span class="keyword">new</span> std::string(<span class="string">&quot;hello&quot;</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;p_scope-&gt;size() = &quot;</span> &lt;&lt; p_scope-&gt;<span class="built_in">size</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;p_auto-&gt;size() = &quot;</span>&lt;&lt; p_auto-&gt;<span class="built_in">size</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 区别之处</span></span><br><span class="line">    boost::scoped_ptr&lt;std::string&gt; p_another_scope = p_scope; <span class="comment">// 这句会报错因为 scoped_pt r不能被复制构造或被赋值。</span></span><br><span class="line">    std::auto_ptr&lt;std::string&gt; p_another_auto = p_auto;<span class="comment">// 在完成赋值后，p_auto就只剩下一个空指针</span></span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;p_another_auto-&gt;size() = &quot;</span> &lt;&lt; p_another_auto-&gt;<span class="built_in">size</span>() &lt;&lt; std::endl;</span><br><span class="line">    (*p_auto).<span class="built_in">size</span>();<span class="comment">// 这里很危险，测试情况下程序异常结束!!!!!!!!!!!!!!!!!!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个例子不能通过编译，因为 <code>scoped_ptr</code>不能被复制构造或被赋值。源代码如下，可以看出 <code>scoped_ptr</code>的拷贝构造函数被声明在private中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span> <span class="class"><span class="keyword">class</span> <span class="title">scoped_ptr</span> // <span class="title">noncopyable</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    T * px;</span><br><span class="line">    <span class="built_in">scoped_ptr</span>(scoped_ptr <span class="keyword">const</span> &amp;);</span><br><span class="line">    scoped_ptr &amp; <span class="keyword">operator</span>=(scoped_ptr <span class="keyword">const</span> &amp;);</span><br><span class="line">    <span class="keyword">typedef</span> scoped_ptr&lt;T&gt; this_type;</span><br><span class="line">    <span class="keyword">void</span> <span class="keyword">operator</span>==( scoped_ptr <span class="keyword">const</span>&amp; ) <span class="keyword">const</span>;</span><br><span class="line">    <span class="keyword">void</span> <span class="keyword">operator</span>!=( scoped_ptr <span class="keyword">const</span>&amp; ) <span class="keyword">const</span>;</span><br><span class="line">    .....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>auto_ptr </code>既可以复制构造也可以赋值， 但这们同时也意味着它把所有权从<code>p_auto</code>转移给了 <code>p_another_auto</code>, 在赋值后<code> p_auto</code> 将只剩下一个空指针。</p>
+<p>建议：</p>
+<blockquote>
+<ol>
+<li>永远不要把 <code>auto_ptr</code> 放入标准库的容器里。如果你试一下，通常你会得到一个编译错误；如 果你没有得到错误，你就麻烦了。</li>
+<li>由于 <code>scoped_ptr::get </code>会返回一个裸指针，所以就有可能对 <code>scoped_ptr</code> 做一些有害的事情，其中有两件是你 尤其要避免的。第一，不要删除这个裸指针。因为它会在 <code>scoped_ptr</code> 被销毁时再一次被删除。第二，不要把这 个裸指针保存到另一个<code> scoped_ptr</code> (或其它任何的智能指针)里。因为这样也会两次删除这个指针，每个<code> scoped_ptr</code> 一次。简单地说，尽量少用 get, 除非你要使用那些要求你传送裸指针的遗留代码！</li>
+</ol>
+</blockquote>
+<h6 id="3-1-6-scope-ptr和pImpl用法"><a href="#3-1-6-scope-ptr和pImpl用法" class="headerlink" title="3.1.6 scope_ptr和pImpl用法"></a>3.1.6 scope_ptr和pImpl用法</h6><p>​      由于客户是依赖于类的头文件的，头文件中的任何 变化都会影响客户，即使仅是对私有节或保护节 的修改。pimpl 用法隐藏了这些细节，方法是将私有数据和函数 放入一个单独的类中，并保存在一个实现文件中，然后在头文件中对这个类进行前向声明并保存 一个指向该实现 类的指针。类的构造函数分配这个 pimpl 类，而析构函数则释放它。这样可以消除头文件与实现细节的相关性。 我们来构造一个实现 pimpl 用法的类，然后用智能指针让它更安全些。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> PIMPL_SAMPLE_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PIMPL_SAMPLE_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 前置声明</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Impl</span>;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">pimpl_sample</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">pimpl_sample</span>();</span><br><span class="line">    ~<span class="built_in">pimpl_sample</span>();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dosomething</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Impl *m_pImpl;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// PIMPL_SAMPLE_H</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;pimpl_sample.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Impl</span>&#123;</span></span><br><span class="line">    std::string s;</span><br><span class="line">    <span class="comment">// 一个成员函数</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dosomething</span><span class="params">()</span></span>&#123;</span><br><span class="line">        std::cout &lt;&lt; s &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">pimpl_sample::<span class="built_in">pimpl_sample</span>():<span class="built_in">m_pImpl</span>(<span class="keyword">new</span> Impl)</span><br><span class="line">&#123;</span><br><span class="line">    m_pImpl-&gt;s = <span class="string">&quot;this is Impl idiom&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pimpl_sample::~<span class="built_in">pimpl_sample</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> m_pImpl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pimpl_sample::dosomething</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    m_pImpl-&gt;<span class="built_in">dosomething</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>分析：上述代码看起来很完美，但是其实并非如此，这个实现不是异常安全的！是<code> pimpl_sample</code> 的构造函数有可能在 <code>Impl </code>被 构造后抛出一个异常。在构造函数中抛出异常意味着已构造的对象并不存在，因此在栈展开时将不会调用它的析构 函数。这样就意味着分配给<code> m_pImpl</code>指针的内存将泄漏。然而，有一样简单的解决方法：用<code>scoped_ptr </code>来解救！</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">pimpl_sample</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">pimpl_sample</span>();</span><br><span class="line">    ~<span class="built_in">pimpl_sample</span>();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dosomething</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    boost::scoped_ptr&lt;Impl&gt; m_pImpl;<span class="comment">// 利用智能指针解决问题</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​    让 <code>scoped_ptr </code>来处理隐藏类 <code>Impl</code> 的生存期管理，并从析构函数中去掉对 <code>Impl</code> 的删除，这样就做完了。但是，你必须记住要手工定义析构函数；原因是在编译器生成隐式析构函数 时，类 <code>Impl</code> 还是不完整的，所以它的析构函数不能被调用。如果你用 <code>auto_ptr</code> 来保存 <code>Impl</code>, 你可以编译，但也还是有这个问题，但如果用<code>scoped_ptr</code>, 你将收到一个错误提示。</p>
+<p>在以下情况使用<code>scoped_ptr</code>：</p>
+<ul>
+<li>在可能有异常抛出的作用域使用指针</li>
+<li>函数里有几条控制路径</li>
+<li>动态分配对象的生存期应被限制于特定的作用域内</li>
+<li>异常安全非常重要时</li>
+</ul>
+<h5 id="3-2-scoped-array"><a href="#3-2-scoped-array" class="headerlink" title="3.2 scoped_array"></a>3.2 scoped_array</h5><p>​    需要动态分配数组时，通常最好用 std::vector 来实现，但是有两种情形，看起来用数组更应该：一种是为了优化，用 vector 多少有一些额外的内存和速度开销；另一种是为了某种原因，必须要求数组的大小是固定的。没有非常清晰的优点。实际上，<strong>最好还是用 std::vector</strong> ，除非性能测试表示 scoped_array 的好处是可保证的。</p>
+<p>​    但是记住，多数情况下应该使用 std::vector，它更灵活、更强大。只有当你需要 确保数组的大小是固定的时候，才使用 scoped_array 来替代 std::vector</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">智能指针</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/03/25/C-%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E5%92%8CBoost%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Linux-GDB调试和ldd指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1328,98 +1514,6 @@
 
 
   
-    <article id="post-Git错误记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/02/04/Git%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/">Git错误记录</a>
-    </h1>
-  
-
-        
-        <a href="/2022/02/04/Git%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2022-02-04T02:28:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1-错误描述"><a href="#1-错误描述" class="headerlink" title="1 错误描述"></a>1 错误描述</h4><blockquote>
-<p>error: failed to push some refsto‘远程仓库地址’</p>
-</blockquote>
-<h4 id="2-错误原因"><a href="#2-错误原因" class="headerlink" title="2 错误原因"></a>2 错误原因</h4><p>​    在创建仓库的时候，都会勾选“使用Reamdme文件初始化这个仓库”这个操作初识了一个README文件并配置添加了忽略文件。当点击创建仓库时，它会帮我们做一次初始提交。于是我们的仓库就有了README.m和.gitignore文件，然后我们把本地项目关联到这个仓库，并把项目推送到仓库时，我们在关联本地与远程时，两端都是有内容的，但是这两份内容并没有联系，当我们推送到远程或者从远程拉取内容时，都会有没有被跟踪的内容，于是你看git报的详细错误中总是会让你先拉取再推送，但是拉取总是失败。</p>
-<h4 id="3-解决方案"><a href="#3-解决方案" class="headerlink" title="3 解决方案"></a>3 解决方案</h4><h5 id="3-1-方法一"><a href="#3-1-方法一" class="headerlink" title="3.1 方法一"></a>3.1 方法一</h5><p>1 使用如下命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase origin master</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>2 然后再进行上传:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-
-<p>即可推送成功</p>
-<h5 id="3-2-方法二"><a href="#3-2-方法二" class="headerlink" title="3.2 方法二"></a>3.2 方法二</h5><ul>
-<li><p>想要避免这种问题，就要保持创建的仓库是一个空仓库，什么都没有。</p>
-</li>
-<li><p>就是创建仓库的时候不要勾选“使用Readme文件初始化这个仓库”</p>
-</li>
-<li><p>然后克隆下来方便使用，下次要推送就直接可以推送上去了。</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">错误记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/02/04/Git%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1526,6 +1620,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">智能指针</a>
               </li>
             
             <div class="clearfix"></div>
