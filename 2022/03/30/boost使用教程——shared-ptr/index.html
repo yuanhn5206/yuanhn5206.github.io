@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 智能指针 | Yuan H.N</title>
+  <title>boost使用教程——shared_ptr | Yuan H.N</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C++、计算机三维视觉、机器人">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yuan H.N">
-<meta property="og:url" content="http://example.com/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/index.html">
+  <meta name="description" content="1 Boost库使用教程——share_ptr头文件: &quot;boost&#x2F;shared_ptr.hpp&quot; 简介​        shared_ptr 可以从一个裸指针、另一个 shared_ptr、一个 std::auto_ptr、或者一个 boost::weak_ptr 构造。还可以传递第二个参数给 shared_ptr 的构造函数，它被称为删除器(deleter)。删除器稍后会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="boost使用教程——shared_ptr">
+<meta property="og:url" content="http://example.com/2022/03/30/boost%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94shared-ptr/index.html">
 <meta property="og:site_name" content="Yuan H.N">
-<meta property="og:description" content="C++、计算机三维视觉、机器人">
+<meta property="og:description" content="1 Boost库使用教程——share_ptr头文件: &quot;boost&#x2F;shared_ptr.hpp&quot; 简介​        shared_ptr 可以从一个裸指针、另一个 shared_ptr、一个 std::auto_ptr、或者一个 boost::weak_ptr 构造。还可以传递第二个参数给 shared_ptr 的构造函数，它被称为删除器(deleter)。删除器稍后会">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-30T13:17:00.000Z">
+<meta property="article:modified_time" content="2022-03-30T13:17:56.491Z">
 <meta property="article:author" content="Henan Yuan">
-<meta property="article:tag" content="C++ 计算机视觉 三维视觉 Opencv">
+<meta property="article:tag" content="boost">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Yuan H.N" type="application/atom+xml">
@@ -143,60 +145,177 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-boost使用教程——shared-ptr" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/25/C-%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E5%92%8CBoost%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" class="archive-article-date">
-  	<time datetime="2022-03-25T12:43:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/25/C-%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E5%92%8CBoost%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">C++的智能指针和Boost的智能指针</a>
+    <h1 class="article-title" itemprop="name">
+      boost使用教程——shared_ptr
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2022/03/30/boost%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94shared-ptr/" class="archive-article-date">
+  	<time datetime="2022-03-30T13:17:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Boost库使用教程——share-ptr"><a href="#1-Boost库使用教程——share-ptr" class="headerlink" title="1 Boost库使用教程——share_ptr"></a>1 Boost库使用教程——<code>share_ptr</code></h3><p>头文件: <code>&quot;boost/shared_ptr.hpp&quot;</code></p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>​        <code>shared_ptr</code> 可以从一个裸指针、另一个 shared_ptr、一个<code> std::auto_ptr</code>、或者一个<code> boost::weak_ptr</code> 构造。还可以传递第二个参数给 <code>shared_ptr</code> 的构造函数，它被称为删除器(deleter)。删除器稍后会被调用，来处理共享资源的释放。这对于管理那些不是用 new 分配也不是用 <code>delete</code> 释放的资源时非常有用(稍后将看到创建客户化删除器的例子)。 <code>shared_ptr</code> 被创建后，它就可象普通指针一样使用了，除了一点，<strong>它不能被显式地删除。</strong></p>
+<p>​        引用计数智能指针可以分为插入式(intrusive)和非插入式(non-intrusive)两 类。前者要求它所管理 的类提供明确的函数或数据成员用于管理引用计数。这意味着在类的设计时就必须预见到它将与一个插入式的引用计数智能指针一起工作，或 者重新设计它。非插入式的引用计数智能指针对它所管理的类没有任何要求。引用计数智 能指针拥有与它所存指针有关的内存的所有权。没有智能指针的帮助，对象 的共享会存在问题，必须有人负负责删除共享的内存。</p>
+<p>​        <code>shared_ptr</code> 的源代码部分摘要，重要的成员函数和成员变量已经被列出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> boost &#123;</span><br><span class="line">     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">shared_ptr</span> &#123;</span></span><br><span class="line">     <span class="keyword">public</span>:</span><br><span class="line">         <span class="comment">// 构造函数</span></span><br><span class="line">         <span class="comment">//这个构造函数获得给定指针 p 的所有权。参数 p 必须是指向 Y 的有效指针。构造后引用计数设为1。唯一从这个构造函数抛出的异常是 			std::bad_alloc (仅在一种很罕见的情况下发生，即不能获得引用计数器所需的自由空间)。(内存分配失败)</span></span><br><span class="line">         <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Y</span>&gt;</span> <span class="function"><span class="keyword">explicit</span> <span class="title">shared_ptr</span><span class="params">(Y* p)</span></span>;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">//这个构造函数带有两个参数。第一个是 shared_ptr 将要获得所有权的那个资源，第二个是 shared_ptr 被销毁时负责释放资源的一</span></span><br><span class="line">         <span class="comment">//个对象，被保存的资源将以 d(p) 的形式传给那个对象。因此 p 的值是否有效取决于 d。如果引用计数器不能分配成功，shared_ptr</span></span><br><span class="line">         <span class="comment">//抛出一个类型为 std::bad_alloc 的异常</span></span><br><span class="line">         <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Y</span>,<span class="keyword">class</span> <span class="title">D</span>&gt;</span> <span class="built_in">shared_ptr</span>(Y* p, D d);</span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 析构函数 shared_ptr 析构函数对引用计数减一。如果计数为零，则保存的指针被删除。删除指针的方法是调用 operator delete</span></span><br><span class="line">         <span class="comment">// 或者，如果给定了一个执行删除操作的客户化删除器对象，就把保存的指针作为唯一参数调用这个对象。析构函数不会抛出异常。</span></span><br><span class="line">         ~<span class="built_in">shared_ptr</span>();</span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 拷贝构造函数, r 中保存的资源被新构造的 shared_ptr 所共享，引用计数加一。这个构造函数不会抛出异常。</span></span><br><span class="line">         <span class="built_in">shared_ptr</span>(<span class="keyword">const</span> shared_ptr &amp; r);</span><br><span class="line">         </span><br><span class="line">         <span class="comment">//  weak_ptr (本章稍后会介绍)构造 shared_ptr。这使得 weak_ptr 的使用具有线程安全性，因为指向</span></span><br><span class="line">         <span class="comment">// weak_ptr 参数的共享资源的引用计数将会自增(weak_ptr 不影响共享资源的引用计数)。如果 weak_ptr 为空 </span></span><br><span class="line">         <span class="comment">// (r.use_count()==0), shared_ptr 抛出一个类型为 bad_weak_ptr 的异常。</span></span><br><span class="line">         <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Y</span>&gt;</span> <span class="function"><span class="keyword">explicit</span> <span class="title">shared_ptr</span><span class="params">(<span class="keyword">const</span> weak_ptr&lt;Y&gt;&amp; r)</span></span>;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 构造函数 这个构造函数从一个 auto_ptr 获取 r 中保存的指针的所有权，方法是保存指针的一份拷贝并对 auto_ptr</span></span><br><span class="line">         <span class="comment">// 调用release 。构造后的引用计数为1。而 r 当然就变为空的。如果引用计数器不能分配成功，</span></span><br><span class="line">         <span class="comment">// 则抛出 std::bad_alloc 。</span></span><br><span class="line">         <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Y</span>&gt;</span> <span class="function"><span class="keyword">explicit</span> <span class="title">shared_ptr</span><span class="params">(std::auto_ptr&lt;Y&gt;&amp; r)</span></span>;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">//赋值操作共享 r 中的资源，并停止对原有资源的共享。赋值操作不会抛出异常。</span></span><br><span class="line">         shared_ptr&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> shared_ptr&amp; r);</span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 成员函数 reset 函数用于停止对保存指针的所有权的共享。共享资源的引用计数减一</span></span><br><span class="line">         <span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span></span>; </span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 操作符重载这个操作符返回对已存指针所指向的对象的一个引用。如果指针为空，调用 operator* 会导致未定义行为。</span></span><br><span class="line">         <span class="comment">// 这个操作符不会抛出异常。</span></span><br><span class="line">         T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span>;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 这个操作符返回保存的指针。这个操作符与 operator* 一起使得智能指针看起来象普通指针。这个操作符不会抛出异常</span></span><br><span class="line">         T* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span>;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 成员函数 get 函数是当保存的指针有可能为空时(这时 operator* 和 operator-&gt; 都会导致未定义行为)获取它的最好办法。</span></span><br><span class="line">         <span class="comment">// 注意，你也可以使用隐式布尔类型转换来测试 shared_ptr 是否包含有效指针。这个函数不会抛出异常</span></span><br><span class="line">         <span class="function">T* <span class="title">get</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 这个函数在 shared_ptr 是它所保存指针的唯一拥有者时返回 true；否则返回 false。 unique 不会抛出异常。</span></span><br><span class="line">         <span class="function"><span class="keyword">bool</span> <span class="title">unique</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">//use_count 函数返回指针的引用计数。它在调试的时候特别有用，因为它可以在程序执行的关键点获得引用计数的快照。</span></span><br><span class="line">         <span class="comment">// 小心地使用它，因为在某些可能的 shared_ptr 实现中，计算引用计数可能是昂贵的，甚至是不行的。这个函数不会抛出异常</span></span><br><span class="line">         <span class="function"><span class="keyword">long</span> <span class="title">use_count</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 这是个到 unspecified_bool_type 类型的隐式转换函数，它可以在Boolean上下文中测试一个智能指针。</span></span><br><span class="line">         <span class="comment">// 如果shared_ptr 保存着一个有效的指针，返回值为 True；否则为 false。</span></span><br><span class="line">         <span class="comment">// 注意，转换函数返回的类型是不确定的。</span></span><br><span class="line">         <span class="comment">// 把返回类型当成 bool 用会导致一些荒谬的操作，所以典型的实现采用了safe bool idiom,</span></span><br><span class="line">         <span class="comment">// 它很好地确保了只有可适用的Boolean测试可以使用。这个函数不会抛出异常</span></span><br><span class="line">         <span class="function"><span class="keyword">operator</span> <span class="title">unspecified_bool_type</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 这可以很方便地交换两个 shared_ptr。swap 函数交换保存的指针(以及它们的引用计数)。这个函数不会抛出异常。</span></span><br><span class="line">         <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(shared_ptr&lt;T&gt;&amp; b)</span></span>;</span><br><span class="line">     &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 要对保存在 shared_ptr 里的指针执行 static_cast，我们可以取出指针然后强制转换它，</span></span><br><span class="line">    <span class="comment">// 但我们不能把它存到另一个 shared_ptr 里；新的 shared_ptr 会认为它是第一个管理这些资源的。</span></span><br><span class="line">    <span class="comment">// 解决的方法是用static_pointer_cast. 使用这个函数可以确保被指物的引用计数保持正确。 static_pointer_cast 不会抛出异常</span></span><br><span class="line">     <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>,<span class="keyword">class</span> <span class="title">U</span>&gt;</span> <span class="function">shared_ptr&lt;T&gt; <span class="title">static_pointer_cast</span><span class="params">(<span class="keyword">const</span> shared_ptr&lt;U&gt;&amp; r)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><p>​        使用 <code>shared_ptr</code> 解决的主要问题是知道删除一个被多个客户共享的资源的正确时机。如下所示的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/shared_ptr.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    boost::shared_ptr&lt;<span class="keyword">int</span>&gt; no_;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">A</span>(boost::shared_ptr&lt;<span class="keyword">int</span>&gt; no):<span class="built_in">no_</span>(no)&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">value</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        *no_ = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    boost::shared_ptr&lt;<span class="keyword">int</span>&gt; no_;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">B</span>(boost::shared_ptr&lt;<span class="keyword">int</span>&gt; no):<span class="built_in">no_</span>(no)&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> *no_;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shared_ptr_test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 引用计数为 1</span></span><br><span class="line">    <span class="function">boost::shared_ptr&lt;<span class="keyword">int</span>&gt; <span class="title">tmp</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">14</span>))</span></span>;</span><br><span class="line">    <span class="comment">// 引用计数为 2</span></span><br><span class="line">    <span class="function">A <span class="title">a</span><span class="params">(tmp)</span></span>;</span><br><span class="line">    std::cout &lt;&lt; tmp.<span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 引用计数为3</span></span><br><span class="line">    <span class="function">B <span class="title">b</span><span class="params">(tmp)</span></span>;</span><br><span class="line">    std::cout &lt;&lt; tmp.<span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    a.<span class="built_in">value</span>(<span class="number">28</span>);</span><br><span class="line">    std::cout &lt;&lt; b.<span class="built_in">value</span>() &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序正确调用后的输出结果为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">3</span><br><span class="line">28</span><br></pre></td></tr></table></figure>
+
+<p>​        上篇文章中使用了<code>scoped_ptr</code>实现了pImpl的用法，这种用法的累是不允许被复制的，那么 scoped_ptr 在保 存 pimpl 的动态分配实例时它工作得很好。但是这并不适合于所有想从 pimpl 用法中获益的类型(注意，你还可以 用 scoped_ptr ，但必须手工实现复制构造函数和赋值操作符)。对于那些可以处理共享的实现细节的类，应该用 shared_ptr 。当 pimpl 的所有权被传递给一个 shared_ptr, 复制和赋值操作都是免费的。</p>
+<h4 id="share-ptr与标准库容器"><a href="#share-ptr与标准库容器" class="headerlink" title="share_ptr与标准库容器"></a>share_ptr与标准库容器</h4><p>​        把对象直接存入容器中有时会有些麻烦。以值的方式保存对象意味着使用者将获得容器中的元素的拷贝，对于那些复制是一种昂贵的操作的类型来说可能会有性能的问题。此外，有些容器，特别是 std::vector, 当你加入元素时可能会复制所有元素，这更加重了性能的问题。最后，传值的语义意味着没有多态的行为。如果你需要在容器中存放多态的对象而且你不想切割它 们，你必须用指针。如果你用裸指针，维护元素的完整性会非常复杂。从容器中删除元素时，你必须知道容器的使用者是否还在引用那些要删除的元素，不用担心多个使用者使用同一个元素。这些问题都可以用 <code>shared_ptr</code> 来解决。</p>
+<p>​        把共享指针存入到标准库容器的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/shared_ptr.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">sing</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">A</span>() &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">sing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;hello ~~~ hello ~~~ hello ~~~~&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// factory function</span></span><br><span class="line"><span class="function">boost::shared_ptr&lt;A&gt; <span class="title">createA</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">boost::shared_ptr&lt;A&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> B())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_container</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">typedef</span> std::vector&lt;boost::shared_ptr&lt;A&gt;&gt; container_type;</span><br><span class="line">    <span class="keyword">typedef</span> container_type::iterator iterator;</span><br><span class="line"></span><br><span class="line">    container_type container;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i)&#123;</span><br><span class="line">        container.<span class="built_in">push_back</span>(<span class="built_in">createA</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(iterator it = container.<span class="built_in">begin</span>(); it != container.<span class="built_in">end</span>(); ++it)&#123;</span><br><span class="line">        (*it)-&gt;<span class="built_in">sing</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个程序有趣的是，即使A的析构函数没有本声明为<code>virtual</code>的，<code>shared_ptr</code>依然可以正确的调用B的析构函数。</p>
+<h4 id="shared-ptr与其他资源"><a href="#shared-ptr与其他资源" class="headerlink" title="shared_ptr与其他资源"></a><code>shared_ptr</code>与其他资源</h4><p>​        有时你会发现你要把<code> shared_ptr</code> 用于某个特别的类型，它需要其它清除操作而不是简单的 <code>delete</code>。<code>shared_ptr</code> 可以通过客户化删除器来支持这种需要(自己定义资源回收释放)。那些处理象 <code>FILE*</code> 这样的操作系统句柄的资源通常要使用象<code> fclose</code> 这样的操作来释放。要在 <code>shared_ptr</code> 里使用 FILE* ，我们要定义一个类来负责释放相应的资源。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileCloser</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">FileCloser</span>() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(FILE *file)</span></span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;the file closer has been called with a FILE*, &quot;</span></span><br><span class="line">                     <span class="string">&quot;which will now be closed.\n&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span>(file != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">fclose</span>(file);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_filecloser</span><span class="params">()</span></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;---------shared_ptr example with a custom dealloctor-------------.\n&quot;</span>;</span><br><span class="line">    &#123;</span><br><span class="line">        FILE* f = <span class="built_in">fopen</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">        <span class="comment">// 文件打开失败</span></span><br><span class="line">        <span class="keyword">if</span>(f == <span class="number">0</span>)&#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;unable to open file.\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">boost::shared_ptr&lt;FILE&gt; <span class="title">my_shared_file</span><span class="params">(f, FileCloser())</span></span>;</span><br><span class="line">        <span class="comment">// 定位文件指针</span></span><br><span class="line">        <span class="built_in">fseek</span>(my_shared_file.<span class="built_in">get</span>(), <span class="number">42</span>, SEEK_SET);</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;by now, the FILE has been closed\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        注意，在访问资源时，我们需要对 <code>shared_ptr </code>使用<code> &amp;*</code> 用法, <code>get</code>, 或 <code>get_pointer</code> 。(请注意最好使用<code> &amp;*</code>. 另两个选择不太清晰) 这个例子还可以更简单，如果我们在释放资源时只需要调用一个单参数函数的话，就根本不需要创建一个客户化删除器类型。上面的例子可以重写如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">     FILE* f=<span class="built_in">fopen</span>(<span class="string">&quot;test.txt&quot;</span>,<span class="string">&quot;r&quot;</span>);</span><br><span class="line">     <span class="keyword">if</span> (f==<span class="number">0</span>) &#123;</span><br><span class="line">     std::cout &lt;&lt; <span class="string">&quot;Unable to open file\n&quot;</span>;</span><br><span class="line">     <span class="keyword">throw</span> <span class="built_in">file_exception</span>();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function">boost::shared_ptr&lt;FILE&gt; <span class="title">my_shared_file</span><span class="params">(f,&amp;fclose)</span></span>;</span><br><span class="line">     <span class="comment">// 定位文件指针</span></span><br><span class="line">     <span class="built_in">fseek</span>(&amp;*my_shared_file,<span class="number">42</span>,SEEK_SET); </span><br><span class="line">&#125;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;By now, the FILE* has been closed!\n&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​        定制删除器在处理需要特殊释放程序的资源时非常有用。由于删除器不是 shared_ptr 类型的一部分，所以使用者 不需要知道关于智能指针所拥有的资源的任何信息(当然除了如何使用它！)。例如，你可以使用对象池，定制删除器 只需简单地把对象返还到池中。或者，<strong>一个 singleton 对象应该使用一个什么都不做的删除器。</strong></p>
+<h4 id="从this创建shared-ptr"><a href="#从this创建shared-ptr" class="headerlink" title="从this创建shared_ptr"></a>从<code>this</code>创建<code>shared_ptr</code></h4><p>需要从 <code>this</code> 获得 <code>shared_ptr</code> ，即是说，你希望你的类被 <code>shared_ptr</code> 所管理，你需要把“自身”转换 为 <code>shared_ptr</code> 的方法。解决方案来自于我们即将讨论的另一个智能指针<code> boost:: weak_ptr</code>.<code> weak_ptr</code> 是 <code>shared_ptr</code> 的一个观察者；<strong>它只是安静地坐着并看着它们，但不会影响引用计数。</strong>通过存 储一个指向 <code>this</code> 的 <code>weak_ptr</code> 作为类的成员，就可以在需要的时候获得一个指向 <code>this</code> 的<code> shared_ptr</code> 。为了你 可以不必编写代码来保存一个指向 <code>this</code> 的 <code>weak_ptr</code> ，接着又从 <code>weak_ptr </code>获 <code>shared_ptr</code> 得，<code>Boost. Smart_ptr</code> 为这个任务提供了一个助手类，称为 <code>enable_shared_from_this</code>. 只要简单地让你的类公有地派生自 <code>enable_shared_from_this</code> ，然后在需要访问管理 <code>this</code> 的 <code>shared_ptr</code> 时，使用函数 <code>shared_from_this</code> 就 行了。下面的例子示范了如何使用 <code>enable_shared_from_this</code> ：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_stuff</span><span class="params">(boost::shared_ptr&lt;A&gt; p)</span></span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;do stuff...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> :</span> <span class="keyword">public</span> boost::enable_shared_from_this&lt;A&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">call_do_stuff</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">do_stuff</span>(<span class="built_in">shared_from_this</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_shared_from_this</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">boost::shared_ptr&lt;A&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> A())</span></span>;</span><br><span class="line">    p-&gt;<span class="built_in">call_do_stuff</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>enable_shared_from_this</code>的源码实现如下，可以看出，<code>enable_shared_from_this</code>使用了<code>weak_ptr</code>作为观察者：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">shared_ptr&lt;T&gt; <span class="title">shared_from_this</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">shared_ptr&lt;T&gt; <span class="title">p</span><span class="params">( weak_this_ )</span></span>;</span><br><span class="line">    <span class="built_in">BOOST_ASSERT</span>( p.<span class="built_in">get</span>() == <span class="keyword">this</span> );</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">shared_ptr&lt;T <span class="keyword">const</span>&gt; <span class="title">shared_from_this</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">shared_ptr&lt;T <span class="keyword">const</span>&gt; <span class="title">p</span><span class="params">( weak_this_ )</span></span>;</span><br><span class="line">    <span class="built_in">BOOST_ASSERT</span>( p.<span class="built_in">get</span>() == <span class="keyword">this</span> );</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>在以下情况时使用 shared_ptr ：<br>● 当有多个使用者使用同一个对象，而没有一个明显的拥有者时<br>● 当要把指针存入标准库容器时<br>● 当要传送对象到库或从库获取对象，而没有明确的所有权时<br>● 当管理一些需要特殊清除方式的资源时（定制删除器）</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">智能指针</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">boost</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/30/boost%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94shared-ptr/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2022/03/25/C-%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E5%92%8CBoost%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++的智能指针和Boost的智能指针</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -219,9 +338,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
